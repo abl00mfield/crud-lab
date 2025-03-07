@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Song</title>
+</head>
+
+<body>
+  <nav>
+    <ul>
+      <li>
+        <a href="/songs">Back to All Songs</a>
+      </li>
+    </ul>
+  </nav>
+  <div class=song-card>
+    <div class=song-info>Title: <%= song.title %></div>
+    <div class=song-info>Artist: <%= song.artist %></div>
+    <div class=song-info>Album: <%= song.album %></div>
+    <div class=song-info>Rating: <%= song.rating %></div>
+  </div>
+</body>
+
+</html>

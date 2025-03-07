@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Songs</title>
+</head>
+
+<body>
+  <nav>
+    <ul>
+      <li>
+        <a href="/songs/new">Add a new song</a>
+      </li>
+      <li>
+        <a href="/">Back to Home Page</a>
+      </li>
+    </ul>
+  </nav>
+  <h1>My Current Songs</h1>
+  <ul>
+    <% songs.forEach(song => { %>
+    <li>
+      <a href="/songs/<%=song._id%>">
+        <%= song.title %>
+      </a>
+    </li>
+
+    <% }) %>
+  </ul>
+
+</body>
+
+</html>

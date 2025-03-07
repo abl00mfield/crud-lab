@@ -4,6 +4,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const PORT = 3000;
 const Song = require("./models/song.js");
+const methodOverride = require("method-override");
+const morgan = require("morgan");
 
 //initialize the express app
 const app = express();
@@ -12,7 +14,14 @@ const app = express();
 dotenv.config();
 
 // Middleware
+//parse the request body
 app.use(express.urlencoded({ extended: false }));
+//override the method param for DELETE and PUT
+app.use(methodOverride("_method"));
+//morgan
+app.use(morgan("dev"));
+//static asset middleware
+app.use(express.static("public"));
 
 //initialize connection to database
 mongoose.connect(process.env.MONGODB_URI);
@@ -26,11 +35,22 @@ app.get("/", (req, res) => {
 });
 
 app.get("/songs", async (req, res) => {
-  res.send("All songs");
+  const allSongs = await Song.find({});
+  res.render("songs/index.ejs", { songs: allSongs });
+});
+
+app.post("/songs", async (req, res) => {
+  await Song.create(req.body);
+  res.redirect("/songs");
 });
 
 app.get("/songs/new", async (req, res) => {
-  res.send("create a new song");
+  res.render("songs/new.ejs");
+});
+
+app.get("/songs/:songId", async (req, res) => {
+  const foundSong = await Song.findById(req.params.songId);
+  res.render("songs/show.ejs", { song: foundSong });
 });
 // Start the server
 app.listen(PORT, () => {
