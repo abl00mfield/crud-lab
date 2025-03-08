@@ -4,10 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/style.css">
   <title>My Song</title>
 </head>
 
-<body>
+<body class="sour-gummy-font">
+
   <nav>
     <ul>
       <li>
@@ -15,17 +17,22 @@
       </li>
     </ul>
   </nav>
-  <div class=song-card>
-    <div class=song-info>Title: <%= song.title %></div>
-    <div class=song-info>Artist: <%= song.artist %></div>
-    <div class=song-info>Album: <%= song.album %></div>
-    <div class=song-info>Rating: <%= song.rating %></div>
-    <form action="/songs/<%=song._id%>?_method=DELETE" method="POST">
-      <button type="submit"> Delete</button>
-    </form>
-    <div class="edit-button">
-      <a href="/songs/<%= song._id %>/edit">Edit Song</a>
+  <div class="song-card-container">
+    <div class=song-card>
+      <div class=song-info>Title: <%= song.title %></div>
+      <div class=song-info>Artist: <%= song.artist %></div>
+      <div class=song-info>Album: <%= song.album %></div>
+      <div class=song-info>Rating: <%= song.rating %></div>
     </div>
+
+    <form class="show-form" action="/songs/<%=song._id%>?_method=DELETE" method="POST">
+      <button type="submit"> Delete</button>
+      <div class="edit-button">
+        <a href="/songs/<%= song._id %>/edit">Edit Song</a>
+      </div>
+    </form>
+  </div>
+
 </body>
 
 </html>

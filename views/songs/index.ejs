@@ -4,10 +4,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/css/style.css">
   <title>Songs</title>
 </head>
 
-<body>
+<body class="sour-gummy-font">
+
   <nav>
     <ul>
       <li>
@@ -18,17 +20,22 @@
       </li>
     </ul>
   </nav>
+
   <h1>My Current Songs</h1>
-  <ul>
+  <div class="small-song-card-container">
     <% songs.forEach(song => { %>
-    <li>
+
+    <div class="small-song-card">
       <a href="/songs/<%=song._id%>">
-        <%= song.title %>
+        <div>Title: <%= song.title %></div>
+        <div>Artist: <%= song.artist %></div>
+        <div>Album: <%= song.album %></div>
+        <div>Rating: <%= song.rating %></div>
       </a>
-    </li>
+    </div>
 
     <% }) %>
-  </ul>
+  </div>
 
 </body>
 
