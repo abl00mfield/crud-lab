@@ -58,6 +58,17 @@ app.delete("/songs/:songId", async (req, res) => {
   await Song.findByIdAndDelete(songToDelete);
   res.redirect("/songs");
 });
+
+app.get("/songs/:songId/edit", async (req, res) => {
+  const foundSong = await Song.findById(req.params.songId);
+  res.render("songs/edit.ejs", { song: foundSong });
+});
+
+app.put("/songs/:songId", async (req, res) => {
+  await Song.findByIdAndUpdate(req.params.songId, req.body);
+  res.redirect(`/songs/${req.params.songId}`);
+});
+
 // Start the server
 app.listen(PORT, () => {
   console.log(`App listening at port ${PORT}`);
