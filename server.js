@@ -64,13 +64,15 @@ app.post("/songs", async (req, res) => {
 
     // Use the originalSong (or the first result if no match found)
     const songData = originalSong || response.data.results[0];
-
+    let formattedDate;
     const date = new Date(songData?.releaseDate);
-    const formattedDate = date.toLocaleString("en-US", {
-      month: "2-digit",
-      day: "2-digit",
-      year: "numeric",
-    });
+    if (date) {
+      formattedDate = date.toLocaleString("en-US", {
+        month: "2-digit",
+        day: "2-digit",
+        year: "numeric",
+      });
+    }
 
     const newSong = {
       title,
@@ -99,8 +101,13 @@ app.get("/songs/new", async (req, res) => {
 });
 
 app.get("/songs/:songId", async (req, res) => {
-  const foundSong = await Song.findById(req.params.songId);
-  res.render("songs/show.ejs", { song: foundSong });
+  console.log(req.params.songId);
+  try {
+    foundSong = await Song.findById(req.params.songId);
+    res.render("songs/show.ejs", { song: foundSong });
+  } catch (error) {
+    res.redirect("/songs");
+  }
 });
 
 app.delete("/songs/:songId", async (req, res) => {
