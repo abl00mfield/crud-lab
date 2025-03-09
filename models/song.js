@@ -4,6 +4,10 @@ const songSchema = new mongoose.Schema({
   artist: String,
   album: String,
   rating: Number,
+  albumArt: String,
+  genre: String,
+  releaseDate: String,
+  previewUrl: String,
 });
 
 const Song = mongoose.model("Song", songSchema);

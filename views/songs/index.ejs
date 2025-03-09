@@ -25,14 +25,19 @@
   <div class="small-song-card-container">
     <% songs.forEach(song => { %>
 
-    <div class="small-song-card">
-      <a href="/songs/<%=song._id%>">
+    <a href="/songs/<%=song._id%>">
+      <div class="small-song-card">
+
+        <% if (song.albumArt) { %>
+        <img src="<%= song.albumArt %>" alt="Album Art">
+        <% } %>
         <div>Title: <%= song.title %></div>
-        <div>Artist: <%= song.artist %></div>
+        <!-- <div>Artist: <%= song.artist %></div>
         <div>Album: <%= song.album %></div>
-        <div>Rating: <%= song.rating %></div>
-      </a>
-    </div>
+        <div>Rating: <%= song.rating %></div> -->
+      </div>
+    </a>
+
 
     <% }) %>
   </div>
