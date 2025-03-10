@@ -31,14 +31,10 @@
         <% if (song.albumArt) { %>
         <img src="<%= song.albumArt %>" alt="Album Art">
         <% } %>
-        <div>Title: <%= song.title %></div>
-        <!-- <div>Artist: <%= song.artist %></div>
-        <div>Album: <%= song.album %></div>
-        <div>Rating: <%= song.rating %></div> -->
+        <div class="small-song-info"><%= song.title %></div>
+        <div class="small-song-info">Rating: <%= song.rating %></div>
       </div>
     </a>
-
-
     <% }) %>
   </div>
 

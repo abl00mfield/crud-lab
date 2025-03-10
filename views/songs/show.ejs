@@ -18,20 +18,22 @@
     </ul>
   </nav>
   <div class="song-card-container">
-    <div class=song-card>
+    <div class="song-card">
       <img src="<%= song.albumArt %>" alt="Album Art">
-      <div class=song-info>Title: <%= song.title %></div>
-      <div class=song-info>Artist: <%= song.artist %></div>
-      <div class=song-info>Album: <%= song.album %></div>
-      <div class=song-info>Rating: <%= song.rating %></div>
-      <div class=song-info>Genre: <%= song.genre %></div>
-      <div class=song-info>Release Date: <%= song.releaseDate %></div>
+      <div class="song-info">Title: <%= song.title %></div>
+      <div class="song-info">Artist: <%= song.artist %></div>
+      <div class="song-info">Album: <%= song.album %></div>
+      <div class="song-info">Rating: <%= song.rating %></div>
+      <div class="song-info">Genre: <%= song.genre %></div>
+      <div class="song-info">Release Date: <%= song.releaseDate %></div>
+      <% if (song.previewUrl) { %>
       <div class="audio-preview">
         <audio controls>
           <source src="<%= song.previewUrl %>" type="audio/mp4">
           Your browser does not support the audio element.
         </audio>
       </div>
+      <% } %>
 
     </div>
 

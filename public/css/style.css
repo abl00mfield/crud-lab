@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
 
 
+
+
 .sour-gummy-font {
     font-family: "Sour Gummy", sans-serif;
     font-optical-sizing: auto;
@@ -14,36 +16,44 @@
     background-color: #fffcfa;
   }
 
+  nav {
+    /* background-color: #5a514e; */
+    padding: 0;
+    text-align: center;
+  }
   
 nav ul {
     display:flex;
     justify-content: center;
-    /* width: 100%; */
-    margin:0;
+    gap: 20px;
     padding:0;
+    list-style:none;
     
 }
-nav li:hover {
+nav a:hover {
     background-color: #fcf1b9;
+    transition: color 0.3s ease-in-out;
 }
 
 h1 {
     text-align:center;
-    font-size: 2em;
+    font-size: 3em;
 }
 
 nav a {
-    text-decoration:none;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px;
 }
 
 nav li {
-    list-style-type: none;
-    margin: 5px;
-    font-size: 1.4em;
-    /* border: black solid 1px; */
-    /* padding: 5px; */
+    padding: 8px 15px;
+    font-size: 1.8em;
 
 }
+
+
 .welcome-box {
     width: 50%;
     height:75vh;
@@ -75,22 +85,42 @@ a:visited {
 }
 
 .song-card {
-    display:flex;
+    /* display:flex;
     flex-direction:column;
     max-width:500px;
-    background-color: #b5ada9;
+    background-color:#fcf1b9;
     border-radius: 8px;
     padding: 10px;
     font-size: 1.3em;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-    justify-content: center;
+    justify-content: center; */
     /* align-items: center; */
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    /* min-width:400px; */
+    background-color: #fcf1b9;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
+    align-items: center;
+    text-align: center;
+}
+
+.small-song-card img {
+    align-self: center;
+    justify-self:center;
+    height: 100px;
+    width: 100px;
 }
 
 .song-card img {
     align-self: center;
-    height: 100px;
-    width: 100px;
+    justify-self:center;
+    height: 150px;
+    width: 150px;
+    border-radius: 10px;
+    margin-bottom: 10px;
 }
 .audio-preview {
     align-self:center;
@@ -98,12 +128,18 @@ a:visited {
 
 .song-info {
     font-size: 1.5em;
-    padding: 5px;
+    margin-bottom: 8px;
+    /* padding: 5px; */
+}
+.small-song-info {
+    text-align:center;
 }
 
 .form-container {
     max-width: 350px;
     margin: 20px auto;
+    background-color: #fcf1b9;
+    padding: 15px;
     /* margin-left: 20px; */
 }
 
@@ -120,7 +156,37 @@ form {
 
 label {
     margin-top: 10px;
+    font-size: 1.5em;
 }
+
+input {
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+    /* width: 100%; Ensures uniformity */
+}
+
+button {
+    /* background-color: #5a514e; */
+    background-color: #ccc;
+    margin-top: 15px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 1.3em;
+    font-weight: bold;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+    font-family: "Sour Gummy", sans-serif;
+}
+
+button:hover {
+    background-color: white;
+    /* color: black; */
+    transform: scale(1.05);
+}
+
+/* 
 input, button {
     padding: 8px;
     margin-top: 5px;
@@ -136,10 +202,10 @@ button {
     cursor: pointer;
     width:120px;
     align-self: center;
-}
+} */
 
 
-.edit-button {
+/* .edit-button {
     margin-top: 15px;
     background-color: #5a514e;
     color: white;
@@ -153,9 +219,6 @@ button {
     font-size: 1em;
 }
 
-/* .edit-button a:visited {
-    color:white;
-} */
 
 .edit-button a {
     text-decoration: none;
@@ -168,14 +231,59 @@ button {
 }
 .edit-button:hover a {
     color: black; 
+} */
+
+.edit-button {
+    /* margin-top: 15px;
+    background-color: #5a514e; 
+    width: 120px;
+    text-align: center;
+    font-size: 1em;
+    padding: 8px;
+    border-radius: 5px; */
+    /* cursor: pointer; */
+    background-color: #ccc;
+    border: 1px solid #ccc; /* Match default button border */
+    margin-top: 15px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 1.3em;
+    font-weight: bold;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+    border-bottom: 2px solid #888;  /* Darker bottom border */
+    border-right: 2px solid #888;   /* Darker right border */
 }
+
+
+.edit-button a {
+    text-decoration: none; /* Remove underline from the link */
+    color: black; /* Same text color as delete button */
+    display: block; /* Makes the entire button clickable */
+    padding: 8px;
+}
+
+.edit-button:hover {
+    /* background-color: white;
+    color: black;
+    transform: scale(1.05); */
+    background-color: white;
+    transform: scale(1.05);
+    border: 1px solid #aaa;
+    border-bottom: 2px solid #888;  /* Darker bottom border */
+    border-right: 2px solid #888;   /* Darker right border */
+
+}
+
+/* .edit-button a:hover {
+    color: black; /* Change text color on hover */
+
+
+
+
 #rating {
     width: 75px;
 }
-button:hover {
-    background-color: #fcf1b9;
-    color:black;
-}
+
 
 .small-song-card-container {
     display: flex;
@@ -186,14 +294,40 @@ button:hover {
 }
 
 .small-song-card {
-    padding:15px;
+    
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
     background-color: #fcf1b9;
-    color:black;
-    height: 200px;
+    color: black;
+    height: 250px; 
     width: 200px;
-    font-size: 1.3em;
+    font-size: 1.5em;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+
 
 }
 .small-song-card:hover {
     background-color: #fffcfa;
+    transform: scale(1.05);
+}
+
+@media screen and (max-width: 768px) {
+    .small-song-card-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* .small-song-card {
+        width: 90%;
+        height: auto;
+    } */
+
+    .form-container {
+        width: 90%;
+    }
 }

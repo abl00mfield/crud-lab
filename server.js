@@ -40,59 +40,64 @@ app.get("/songs", async (req, res) => {
   res.render("songs/index.ejs", { songs: allSongs });
 });
 
-app.post("/songs", async (req, res) => {
+const fetchSong = async (artist, album, title) => {
   try {
-    const { title, artist, album, rating } = req.body;
+    //fetch song data from itunes API
     const response = await axios.get(`https://itunes.apple.com/search`, {
       params: {
         term: `"${artist}" "${album}" "${title}"`,
         media: "music",
         entity: "musicTrack",
-        limit: 5,
+        limit: 1,
       },
     });
-    const originalSong = response.data.results.find((song) => {
-      return (
-        !song.trackName.toLowerCase().includes("remix") &&
-        !song.trackName.toLowerCase().includes("cover") &&
-        !song.trackName.toLowerCase().includes("karaoke") &&
-        !song.collectionName.toLowerCase().includes("remix") &&
-        !song.collectionName.toLowerCase().includes("cover") &&
-        !song.collectionName.toLowerCase().includes("karaoke")
-      );
+    return response.data.results[0]; //return the first response
+  } catch (error) {
+    console.log("There was an error fetching the song data");
+    return null;
+  }
+};
+
+//format release date to MM/DD/YYYY format
+const formatDate = (dateStr) => {
+  let formattedDate;
+  const date = dateStr ? new Date(dateStr) : null;
+  if (date) {
+    formattedDate = date.toLocaleString("en-US", {
+      month: "2-digit",
+      day: "2-digit",
+      year: "numeric",
     });
+    return formattedDate;
+  } else {
+    return null;
+  }
+};
 
-    // Use the originalSong (or the first result if no match found)
-    const songData = originalSong || response.data.results[0];
-    let formattedDate;
-    const date = new Date(songData?.releaseDate);
-    if (date) {
-      formattedDate = date.toLocaleString("en-US", {
-        month: "2-digit",
-        day: "2-digit",
-        year: "numeric",
-      });
-    }
+app.post("/songs", async (req, res) => {
+  const { title, artist, album, rating } = req.body; //get the info from the form
+  const songData = await fetchSong(artist, album, title); //get song details from API
+  const releaseDate = formatDate(songData?.releaseDate); //format release date
 
-    const newSong = {
-      title,
-      artist: songData?.artistName || artist,
-      album: songData?.collectionName || album || "Unknown",
-      rating,
-      albumArt: songData?.artworkUrl100 || "/images/default.png",
-      genre: songData?.primaryGenreName || "Unknown",
-      releaseDate: formattedDate || "Unknown",
-      previewUrl: songData?.previewUrl || "No Preview",
-    };
+  const newSong = {
+    //create the new Song with all the details from the API
+    title: songData?.trackName || title,
+    artist: songData?.artistName || artist,
+    album: songData?.collectionName || album || "Unknown",
+    rating,
+    albumArt: songData?.artworkUrl100 || "/images/default.png",
+    genre: songData?.primaryGenreName || "Unknown",
+    releaseDate: releaseDate || "Unknown",
+    previewUrl: songData?.previewUrl || "",
+  };
 
-    console.log("song URL ", songData?.previewUrl);
-    console.log("new song ", newSong);
-
+  try {
+    // add the new song to the database
     await Song.create(newSong);
     res.redirect("/songs");
   } catch (error) {
-    console.error("Error fetching song data: ", error);
-    res.redirect("/songs");
+    console.error("Error adding to database ", error);
+    res.send("Sorry, there was an error", error);
   }
 });
 
