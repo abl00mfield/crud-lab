@@ -32,7 +32,11 @@
         <img src="<%= song.albumArt %>" alt="Album Art">
         <% } %>
         <div class="small-song-info"><%= song.title %></div>
-        <div class="small-song-info">Rating: <%= song.rating %></div>
+        <div class="small-song-info">
+          <% for (let i = 0; i< song.rating; i++) { %>
+          ⭐
+          <% } %>
+        </div>
       </div>
     </a>
     <% }) %>
